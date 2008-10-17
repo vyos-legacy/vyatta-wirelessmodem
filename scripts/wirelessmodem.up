@@ -1,0 +1,12 @@
+#!/bin/sh
+
+device=$1
+tty=$2
+ipparam=$6
+
+if [ -z "$(echo $tty |  egrep "tty(USB|ACM)")" ]; then
+  echo "Not a wirelessmodem"
+  exit 0
+fi
+
+/usr/bin/vyatta-vtysh -c "conf t" -c "ip route 0.0.0.0/0 $device $ipparam " 
