@@ -1,0 +1,7 @@
+help: Show specified wirelessmodem interface information
+allowed: for dev in /sys/class/net/*; do
+           if [[ $(cat $dev/type) -eq 512 ]]; then
+              echo -n ${dev##*/} " ";
+           fi;
+         done;
+run: ${vyatta_bindir}/vyatta-show-interfaces.pl --intf="$4"

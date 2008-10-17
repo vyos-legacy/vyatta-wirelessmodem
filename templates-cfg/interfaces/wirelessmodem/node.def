@@ -1,0 +1,74 @@
+tag:
+type: txt
+help: Set wireless modem interface
+comp_help: Enter wireless modem interface name (ppp0 - ppp999)
+syntax:expression: pattern $VAR(@) "^ppp[0-9]+$" ; "Must be (ppp0 - ppp999)"
+delete: touch /tmp/wirelessmodem-$VAR(@).del
+end: if [ -f /var/run/$VAR(@).pid ]; then
+         pid=$(cat /var/run/$VAR(@).pid);
+         kill $pid;
+         while [ -d /proc/$pid ]; do
+           sleep 1;
+         done;
+     fi;
+     if [ -f /tmp/wirelessmodem-$VAR(@).del ]; then
+         rm -f /tmp/wirelessmodem-$VAR(@).del
+         exit 0;
+     fi;
+     rm -f /etc/ppp/peers/$VAR(@).wirelessmodem /etc/ppp/peers/$VAR(@).wirelessmodem_chat
+     if [ -z "$(ip link show $VAR(@) 2>&1 | grep -v "^Device")" ]; then
+#       if [ -z "$(grep 'Sierra Wireless' /proc/bus/usb/devices)" ]; then
+#	 echo "  Unable to find a Sierra wireless modem.";
+#         exit 1;
+#       fi;
+
+       if [ -n "$VAR(./backup)" ]; then
+         echo ipparam 10 >> /etc/ppp/peers/$VAR(@).wirelessmodem;    
+       fi;
+
+       if [ -n "$VAR(./ondemand)" ]; then
+         echo demand >> /etc/ppp/peers/$VAR(@).wirelessmodem;
+       fi;
+
+       if [ -z "$VAR(./no-dns)" ]; then
+         echo usepeerdns >> /etc/ppp/peers/$VAR(@).wirelessmodem;
+       fi;
+
+       if [ -n "$VAR(./mtu/@)" ]; then
+         echo mtu $VAR(./mtu/@) >> /etc/ppp/peers/$VAR(@).wirelessmodem;
+       fi;
+
+       if [ -n "$VAR(./device/@)" ]; then
+         device=$VAR(./device/@);
+       else 
+	 device='ttyUSB0';
+       fi;
+       echo /dev/$device >> /etc/ppp/peers/$VAR(@).wirelessmodem;
+
+       unit=$(echo $VAR(@) | sed 's/ppp//');
+
+       # setup the peers file
+       echo -e "lcp-echo-failure 0\n115200" >> /etc/ppp/peers/$VAR(@).wirelessmodem;
+       echo -e "debug\nnodefaultroute\nipcp-max-failure 4" >> /etc/ppp/peers/$VAR(@).wirelessmodem;
+       echo -e "ipcp-accept-local\nipcp-accept-remote\nnoauth\ncrtscts" >> /etc/ppp/peers/$VAR(@).wirelessmodem;
+       echo -e "lock\npersist\nunit $unit" >> /etc/ppp/peers/$VAR(@).wirelessmodem;
+       echo connect \'/usr/sbin/chat -v -t6 -f /etc/ppp/peers/$VAR(@).wirelessmodem_chat\' >> /etc/ppp/peers/$VAR(@).wirelessmodem;
+
+       # setup the dial chat script
+       echo ABORT \'NO DIAL TONE\' ABORT \'NO ANSWER\' ABORT \'NO CARRIER\' ABORT DELAYED >> /etc/ppp/peers/$VAR(@).wirelessmodem_chat;
+       echo -e "'' AT\nOK ATZ" >> /etc/ppp/peers/$VAR(@).wirelessmodem_chat;
+       if [ -n "$VAR(./dial-string/@)" ]; then
+         echo OK  \'AT+CGDCONT=1,\"IP\",\"$VAR(./dial-string/@)\"\' >> /etc/ppp/peers/$VAR(@).wirelessmodem_chat;
+       else
+         echo OK  \'AT+CGDCONT=1,\"IP\",\"ISP.CINGULAR\"\' >> /etc/ppp/peers/$VAR(@).wirelessmodem_chat;
+       fi;
+       echo -e "OK ATD*99#\nCONNECT ''" >> /etc/ppp/peers/$VAR(@).wirelessmodem_chat;
+
+       rm -f /var/run/$VAR(@).log;
+       pppd call $VAR(@).wirelessmodem > /var/run/$VAR(@).log;
+     else 
+       echo '  PPP interface $VAR(@) already exists!'
+       echo '  Please choose another interface name';
+       echo '  for the wirelessmodem.';
+       exit 1;
+     fi;  

@@ -1,0 +1,5 @@
+vyatta-wirelessmodem (0.1) unstable; urgency=low
+
+  * Initial Release.
+
+ -- Robert Bays <robert@vyatta.com>  Thu, 16 Oct 2008 17:02:02 -0700

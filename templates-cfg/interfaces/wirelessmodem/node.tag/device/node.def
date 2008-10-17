@@ -1,0 +1,3 @@
+type: txt
+help: Set the system device ID
+comp_help: \1  <ttyXXX>\tsystemtty device (default ttyUSB0)

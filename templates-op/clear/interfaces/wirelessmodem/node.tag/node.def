@@ -1,0 +1,5 @@
+help: Clear interface information for a given ethernet interface
+allowed: local -a array ;
+	 array=( /sys/class/net/ppp* ) ;
+	 echo  -n ${array[@]##*/}
+

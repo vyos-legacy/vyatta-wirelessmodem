@@ -1,0 +1,6 @@
+The Debian Package vyatta-wirelessmodem
+----------------------------
+
+This package has the Vyatta configuration and operational templates and scripts for USB 3G wirelessmodems.
+
+ -- Robert Bays <robert@vyatta.com>  Thu, 16 Oct 2008 17:02:02 -0700

@@ -1,0 +1,7 @@
+help: Show specified wirelessmodem interface statistics
+allowed: for dev in /sys/class/net/*; do
+           if [[ $(cat $dev/type) -eq 512 ]]; then
+              echo -n ${dev##*/} " ";
+           fi;
+         done;
+run: pppstats $4
