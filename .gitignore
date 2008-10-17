@@ -10,11 +10,8 @@
 /config.sub
 /configure
 /debian/files
-/debian/vyatta-cluster
-/debian/vyatta-cluster.postinst
-/debian/vyatta-cluster.postrm
-/debian/vyatta-cluster.debhelper.log
+/debian/vyatta-wirelessmodem
 /INSTALL
 /Makefile.in
 /Makefile
-
+debian/vyatta-wirelessmodem.debhelper.log
