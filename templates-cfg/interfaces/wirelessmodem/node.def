@@ -11,11 +11,14 @@ end: if [ -f /var/run/$VAR(@).pid ]; then
            sleep 1;
          done;
      fi;
+
      if [ -f /tmp/wirelessmodem-$VAR(@).del ]; then
          rm -f /tmp/wirelessmodem-$VAR(@).del
          exit 0;
      fi;
-     rm -f /etc/ppp/peers/$VAR(@).wirelessmodem /etc/ppp/peers/$VAR(@).wirelessmodem_chat
+
+     rm -f /etc/ppp/peers/$VAR(@).wirelessmodem; 
+
      if [ -z "$(ip link show $VAR(@) 2>&1 | grep -v "^Device")" ]; then
        if [ -n "$VAR(./backup)" ]; then
          echo ipparam 10 >> /etc/ppp/peers/$VAR(@).wirelessmodem;    

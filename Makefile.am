@@ -9,6 +9,7 @@ install-exec-hook:
 	mkdir -p $(DESTDIR)$(networkdir)
 	cp scripts/att $(DESTDIR)$(networkdir)/
 	cp scripts/verizon $(DESTDIR)$(networkdir)/
+	cp scripts/sc1 $(DESTDIR)$(networkdir)/
 	mkdir -p $(DESTDIR)/etc/ppp/ip-up.d $(DESTDIR)/etc/ppp/ip-down.d
 	cp scripts/wirelessmodem.up $(DESTDIR)/etc/ppp/ip-up.d/wirelessmodem
 	cp scripts/wirelessmodem.down $(DESTDIR)/etc/ppp/ip-down.d/wirelessmodem
