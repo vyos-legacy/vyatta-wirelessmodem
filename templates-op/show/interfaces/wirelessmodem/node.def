@@ -1,2 +1,2 @@
-help: Show wireless modem interface information
 #run: ${vyatta_bindir}/vyatta-show-interfaces.pl --intf-type=ppp --action=show-brief
+help: Show wireless modem interface information
