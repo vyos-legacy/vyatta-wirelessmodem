@@ -6,7 +6,7 @@ syntax:expression: pattern $VAR(@) "^ppp[0-9]+$" ; "Must be (ppp0 - ppp999)"
 delete: touch /tmp/wirelessmodem-$VAR(@).del
 end: if [ -f /var/run/$VAR(@).pid ]; then
          pid=$(cat /var/run/$VAR(@).pid);
-         kill $pid;
+         sudo kill $pid;
          while [ -d /proc/$pid ]; do
            sleep 1;
          done;
@@ -17,23 +17,29 @@ end: if [ -f /var/run/$VAR(@).pid ]; then
          exit 0;
      fi;
 
-     rm -f /etc/ppp/peers/$VAR(@).wirelessmodem; 
+     tmpfile="/tmp/wirelessmodem-$VAR(@)"
+     rm -f $tmpfile; 
 
      if [ -z "$(ip link show $VAR(@) 2>&1 | grep -v "^Device")" ]; then
        if [ -n "$VAR(./backup)" ]; then
-         echo ipparam 10 >> /etc/ppp/peers/$VAR(@).wirelessmodem;    
+	 if [ -n "$VAR(./backup/distance/@)" ]; then 
+	   metric="$VAR(./backup/distance/@)"
+	 else
+	   metric=10
+	 fi
+         echo ipparam $metric >> $tmpfile;    
        fi;
 
        if [ -n "$VAR(./ondemand)" ]; then
-         echo demand >> /etc/ppp/peers/$VAR(@).wirelessmodem;
+         echo demand >> $tmpfile;
        fi;
 
        if [ -z "$VAR(./no-dns)" ]; then
-         echo usepeerdns >> /etc/ppp/peers/$VAR(@).wirelessmodem;
+         echo usepeerdns >> $tmpfile;
        fi;
 
        if [ -n "$VAR(./mtu/@)" ]; then
-         echo mtu $VAR(./mtu/@) >> /etc/ppp/peers/$VAR(@).wirelessmodem;
+         echo mtu $VAR(./mtu/@) >> $tmpfile;
        fi;
 
        if [ -n "$VAR(./device/@)" ]; then
@@ -41,15 +47,15 @@ end: if [ -f /var/run/$VAR(@).pid ]; then
        else 
 	 device='ttyUSB0';
        fi;
-       echo /dev/$device >> /etc/ppp/peers/$VAR(@).wirelessmodem;
+       echo /dev/$device >> $tmpfile;
 
        unit=$(echo $VAR(@) | sed 's/ppp//');
 
        # setup the peers file
-       echo -e "lcp-echo-failure 0\n115200" >> /etc/ppp/peers/$VAR(@).wirelessmodem;
-       echo -e "debug\nnodefaultroute\nipcp-max-failure 4" >> /etc/ppp/peers/$VAR(@).wirelessmodem;
-       echo -e "ipcp-accept-local\nipcp-accept-remote\nnoauth\ncrtscts" >> /etc/ppp/peers/$VAR(@).wirelessmodem;
-       echo -e "lock\npersist\nunit $unit" >> /etc/ppp/peers/$VAR(@).wirelessmodem;
+       echo -e "lcp-echo-failure 0\n115200" >> $tmpfile;
+       echo -e "debug\nnodefaultroute\nipcp-max-failure 4" >> $tmpfile;
+       echo -e "ipcp-accept-local\nipcp-accept-remote\nnoauth\ncrtscts" >> $tmpfile;
+       echo -e "lock\npersist\nunit $unit" >> $tmpfile;
 
        if [ -n "$VAR(./network/@)" ]; then
          network=$VAR(./network/@);
@@ -57,10 +63,11 @@ end: if [ -f /var/run/$VAR(@).pid ]; then
          network='att';
        fi;
 
-       echo connect \'/usr/sbin/chat -v -t6 -f /opt/vyatta/share/ppp/network/$network\' >> /etc/ppp/peers/$VAR(@).wirelessmodem;
+       echo connect \'/usr/sbin/chat -v -t6 -f /opt/vyatta/share/ppp/network/$network\' >> $tmpfile;
 
-       rm -f /var/run/$VAR(@).log;
-       pppd call $VAR(@).wirelessmodem > /var/run/$VAR(@).log;
+       sudo rm -f /var/run/$VAR(@).log /etc/ppp/peers/$VAR(@).wirelessmodem
+       sudo mv $tmpfile /etc/ppp/peers/$VAR(@).wirelessmodem
+       sudo sh -c "pppd call $VAR(@).wirelessmodem > /var/run/$VAR(@).log";
      else 
        echo '  PPP interface $VAR(@) already exists!'
        echo '  Please choose another interface name';
