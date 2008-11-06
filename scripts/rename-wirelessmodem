@@ -1,0 +1,50 @@
+#!/bin/bash
+
+#
+# Script to re-name ppp interface being used by wirelessmodem to have
+# a form: wlm<num>
+#
+# The name of the current ppp interface is passed in as argument 1.  The full
+# name that we are to change it to is passed in as the first word in argument 6.
+# We don't use the rest of the arguments.
+#
+
+OLD_IFNAME="$1"
+NEW_IFNAME=`echo "$6"|awk '{ print $1 }'`
+
+#
+# The ppp daemon executes this script for all ppp interfaces, even those
+# unrelated to wirelessmodem.  We want to change the names only of
+# interface being used by wirelessmodem.
+#
+IFPREFIX=`echo $NEW_IFNAME | sed s/[0-9]//g`
+if [ "$IFPREFIX" != "wlm" ]; then
+    # its not a wirelessmodem interface
+    exit 0;
+fi
+
+DEFROUTE=`netstat -nra | grep ^0.0.0.0 | grep $OLD_IFNAME`
+
+LOCAL_ADDR=`ip address show dev $OLD_IFNAME | grep inet | awk '{ print $2 }'`
+
+REMOTE_ADDR=`ip address show dev $OLD_IFNAME | grep inet | awk '{ print $4 }'`
+
+# Re-name the interface.  Log all errors to syslog.
+logger -p debug -t "vyatta wirelessmodem"  Re-naming $OLD_IFNAME to $NEW_IFNAME
+ip link set dev $OLD_IFNAME down | \
+    logger -p debug -t "vyatta wirelessmodem"
+ip addr del local $LOCAL_ADDR peer $REMOTE_ADDR dev $OLD_IFNAME | \
+    logger -p debug -t "vyatta wirelessmodem"
+ip link set dev $OLD_IFNAME name $NEW_IFNAME | \
+    logger -p debug -t "vyatta wirelessmodem"
+ip addr add local $LOCAL_ADDR peer $REMOTE_ADDR dev $NEW_IFNAME | \
+    logger -p debug -t "vyatta wirelessmodem"
+ip link set dev $NEW_IFNAME up | \
+    logger -p debug -t "vyatta wirelessmodem"
+
+# Restore the automatic default route, if one existed
+if [ ! -z "$DEFROUTE" ]; then
+    ip route add to default dev $NEW_IFNAME | \
+        logger -p debug -t "vyatta wirelessmodem"
+fi
+

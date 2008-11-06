@@ -1,11 +1,11 @@
 tag:
 type: txt
 help: Set wireless modem interface
-comp_help: Enter wireless modem interface name (ppp0 - ppp999)
-syntax:expression: pattern $VAR(@) "^ppp[0-9]+$" ; "Must be (ppp0 - ppp999)"
+comp_help: Enter wireless modem interface name (wlm0 - wlm999)
+syntax:expression: pattern $VAR(@) "^wlm[0-9]+$" ; "Must be (wlm0 - wlm999)"
 delete: touch /tmp/wirelessmodem-$VAR(@).del
-end: if [ -f /var/run/$VAR(@).pid ]; then
-         pid=$(cat /var/run/$VAR(@).pid);
+end: if [ -f /var/run/ppp-$VAR(@).pid ]; then
+         pid=$(cat /var/run/ppp-$VAR(@).pid | awk '$1 !~ /^ppp/ { print $1 }');
          sudo kill $pid;
          while [ -d /proc/$pid ]; do
            sleep 1;
@@ -27,8 +27,9 @@ end: if [ -f /var/run/$VAR(@).pid ]; then
 	 else
 	   metric=10
 	 fi
-         echo ipparam $metric >> $tmpfile;    
        fi;
+       echo ipparam "\"$VAR(@) $metric\"" >> $tmpfile;
+
 
        if [ -n "$VAR(./ondemand)" ]; then
          echo demand >> $tmpfile;
@@ -49,13 +50,13 @@ end: if [ -f /var/run/$VAR(@).pid ]; then
        fi;
        echo /dev/$device >> $tmpfile;
 
-       unit=$(echo $VAR(@) | sed 's/ppp//');
+       linkname=$(echo $VAR(@));
 
        # setup the peers file
        echo -e "lcp-echo-failure 0\n115200" >> $tmpfile;
        echo -e "debug\nnodefaultroute\nipcp-max-failure 4" >> $tmpfile;
        echo -e "ipcp-accept-local\nipcp-accept-remote\nnoauth\ncrtscts" >> $tmpfile;
-       echo -e "lock\npersist\nunit $unit" >> $tmpfile;
+       echo -e "lock\npersist\nlinkname $linkname" >> $tmpfile;
 
        if [ -n "$VAR(./network/@)" ]; then
          network=$VAR(./network/@);
@@ -69,7 +70,7 @@ end: if [ -f /var/run/$VAR(@).pid ]; then
        sudo mv $tmpfile /etc/ppp/peers/$VAR(@).wirelessmodem
        sudo sh -c "pppd call $VAR(@).wirelessmodem > /var/run/$VAR(@).log";
      else 
-       echo '  PPP interface $VAR(@) already exists!'
+       echo '  Interface $VAR(@) already exists!'
        echo '  Please choose another interface name';
        echo '  for the wirelessmodem.';
        exit 1;
