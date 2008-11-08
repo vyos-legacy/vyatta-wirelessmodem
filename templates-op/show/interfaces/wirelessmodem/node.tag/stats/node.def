@@ -1,7 +1,7 @@
 help: Show specified wirelessmodem interface statistics
-allowed: for dev in /sys/class/net/*; do
-           if [[ $(cat $dev/type) -eq 512 ]]; then
-              echo -n ${dev##*/} " ";
-           fi;
-         done;
-run: pppstats $4
+run: 
+    if [ ! -e /etc/ppp/peers/$4 ]; then
+      echo "Invalid interface: $4"
+    else
+      sudo pppstats $4 2>/dev/null
+    fi

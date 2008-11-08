@@ -1,2 +1,0 @@
-help: Reset ppp session for wireless modem 
-run: sudo kill -SIGHUP `cat /var/run/$4.pid`

@@ -13,7 +13,8 @@ end: if [ -f /var/run/ppp-$VAR(@).pid ]; then
      fi;
 
      if [ -f /tmp/wirelessmodem-$VAR(@).del ]; then
-         rm -f /tmp/wirelessmodem-$VAR(@).del
+         sudo rm -f /tmp/wirelessmodem-$VAR(@).del /tmp/$VAR(@).log \
+                    /etc/ppp/peers/$VAR(@)
          exit 0;
      fi;
 
@@ -66,9 +67,9 @@ end: if [ -f /var/run/ppp-$VAR(@).pid ]; then
 
        echo connect \'/usr/sbin/chat -v -t6 -f /opt/vyatta/share/ppp/network/$network\' >> $tmpfile;
 
-       sudo rm -f /var/run/$VAR(@).log /etc/ppp/peers/$VAR(@).wirelessmodem
-       sudo mv $tmpfile /etc/ppp/peers/$VAR(@).wirelessmodem
-       sudo sh -c "pppd call $VAR(@).wirelessmodem > /var/run/$VAR(@).log &";
+       sudo rm -f /tmp/$VAR(@).log /etc/ppp/peers/$VAR(@)
+       sudo mv $tmpfile /etc/ppp/peers/$VAR(@)
+       sudo sh -c "/usr/sbin/pppd call $VAR(@) > /tmp/$VAR(@).log 2>&1 &";
      else 
        echo '  Interface $VAR(@) already exists!'
        echo '  Please choose another interface name';

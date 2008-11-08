@@ -1,11 +1,6 @@
 help: Show specified wirelessmodem interface startup debug log
-allowed: for dev in /sys/class/net/*; do
-           if [[ $(cat $dev/type) -eq 512 ]]; then
-              echo -n ${dev##*/} " ";
-           fi;
-         done;
-run: if [ -f /var/run/$4.log ]; then
-         cat /var/run/$4.log;
+run: if [ -f /tmp/$4.log ]; then
+         cat /tmp/$4.log;
      else
          echo "No debug log available for $4";
      fi; 
