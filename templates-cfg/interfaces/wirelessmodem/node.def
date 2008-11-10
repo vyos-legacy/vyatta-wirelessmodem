@@ -70,6 +70,7 @@ end: if [ -f /var/run/ppp-$VAR(@).pid ]; then
        sudo rm -f /tmp/$VAR(@).log /etc/ppp/peers/$VAR(@)
        sudo mv $tmpfile /etc/ppp/peers/$VAR(@)
        sudo sh -c "/usr/sbin/pppd call $VAR(@) > /tmp/$VAR(@).log 2>&1 &";
+       sudo chmod 666 /tmp/$VAR(@).log
      else 
        echo '  Interface $VAR(@) already exists!'
        echo '  Please choose another interface name';
