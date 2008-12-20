@@ -10,9 +10,11 @@ install-exec-hook:
 	cp scripts/att $(DESTDIR)$(networkdir)/
 	cp scripts/verizon $(DESTDIR)$(networkdir)/
 	cp scripts/sc1 $(DESTDIR)$(networkdir)/
-	mkdir -p $(DESTDIR)/etc/ppp/ip-up.d $(DESTDIR)/etc/ppp/ip-down.d
+	mkdir -p $(DESTDIR)/etc/ppp/ip-pre-up.d \
+	         $(DESTDIR)/etc/ppp/ip-up.d \
+                 $(DESTDIR)/etc/ppp/ip-down.d
 	cp scripts/wirelessmodem.up $(DESTDIR)/etc/ppp/ip-up.d/wirelessmodem
-	cp scripts/rename-wirelessmodem $(DESTDIR)/etc/ppp/ip-up.d/0003rename-wirelessmodem
+	cp scripts/rename-wirelessmodem $(DESTDIR)/etc/ppp/ip-pre-up.d/0003rename-wirelessmodem
 	cp scripts/wirelessmodem.down $(DESTDIR)/etc/ppp/ip-down.d/wirelessmodem
 	chmod 755 $(DESTDIR)/etc/ppp/ip-up.d/wirelessmodem $(DESTDIR)/etc/ppp/ip-down.d/wirelessmodem
 	chmod 755 $(DESTDIR)/etc/ppp/ip-up.d/0003rename-wirelessmodem

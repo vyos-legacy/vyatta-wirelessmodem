@@ -23,28 +23,7 @@ if [ "$IFPREFIX" != "wlm" ]; then
     exit 0;
 fi
 
-DEFROUTE=`netstat -nra | grep ^0.0.0.0 | grep $OLD_IFNAME`
-
-LOCAL_ADDR=`ip address show dev $OLD_IFNAME | grep inet | awk '{ print $2 }'`
-
-REMOTE_ADDR=`ip address show dev $OLD_IFNAME | grep inet | awk '{ print $4 }'`
-
 # Re-name the interface.  Log all errors to syslog.
 logger -p debug -t "vyatta wirelessmodem"  Re-naming $OLD_IFNAME to $NEW_IFNAME
-ip link set dev $OLD_IFNAME down | \
-    logger -p debug -t "vyatta wirelessmodem"
-ip addr del local $LOCAL_ADDR peer $REMOTE_ADDR dev $OLD_IFNAME | \
-    logger -p debug -t "vyatta wirelessmodem"
 ip link set dev $OLD_IFNAME name $NEW_IFNAME | \
     logger -p debug -t "vyatta wirelessmodem"
-ip addr add local $LOCAL_ADDR peer $REMOTE_ADDR dev $NEW_IFNAME | \
-    logger -p debug -t "vyatta wirelessmodem"
-ip link set dev $NEW_IFNAME up | \
-    logger -p debug -t "vyatta wirelessmodem"
-
-# Restore the automatic default route, if one existed
-if [ ! -z "$DEFROUTE" ]; then
-    ip route add to default dev $NEW_IFNAME | \
-        logger -p debug -t "vyatta wirelessmodem"
-fi
-
