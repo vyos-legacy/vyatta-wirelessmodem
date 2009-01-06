@@ -5,7 +5,7 @@ comp_help: Enter wireless modem interface name (wlm0 - wlm999)
 syntax:expression: pattern $VAR(@) "^wlm[0-9]+$" ; "Must be (wlm0 - wlm999)"
 delete: touch /tmp/wirelessmodem-$VAR(@).del
 end: if [ -f /var/run/ppp-$VAR(@).pid ]; then
-         pid=$(cat /var/run/ppp-$VAR(@).pid | awk '$1 !~ /^ppp/ { print $1 }');
+         pid=$(cat /var/run/ppp-$VAR(@).pid | awk '$1 !~ /^[[:alpha:]]/ { print $1 }');
          sudo kill $pid;
          while [ -d /proc/$pid ]; do
            sleep 1;
