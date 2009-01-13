@@ -1,3 +1,38 @@
+vyatta-wirelessmodem (0.1.0+islavista1) unstable; urgency=low
+
+  [ Robert Bays ]
+  * First pass to add generic carrier support and verizon modem support
+  * more files for generic carrier and verizon
+  * remove show system usb
+  * remove wireless_chat reference
+
+  [ Rick Balocca ]
+  * Conform to git-dch "rules"
+
+  [ rbalocca ]
+  * Fix for bug http://bugzilla.vyatta.com/show_bug.cgi?id=3830
+
+  [ Robert Bays ]
+  * fixes for bugs 3824 and 3868
+
+  [ Mohit Mehta ]
+  * rename wirelessmodem interface name from ppp to wlm as configured in
+    CLI
+  * run pppd in background on wirelessmodem interface commit
+  * polish up wirelessmodem, make changes to have similarity with other
+    cli configured ppp interfaces
+  * wirelessmodem interface log-file permissions should be such that
+    allow writing to file when using
+  * add firewall functionality for wirelessmodem interfaces
+  * add description node for wirelessmodem interfaces
+
+  [ Mark O'Brien ]
+  * 3.2.0
+
+  [ An-Cheng Huang ]
+
+ -- An-Cheng Huang <ancheng@vyatta.com>  Mon, 12 Jan 2009 17:07:05 -0800
+
 vyatta-wirelessmodem (0.1) unstable; urgency=low
 
 	  3.2.0
