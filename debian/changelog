@@ -1,3 +1,10 @@
+vyatta-wirelessmodem (0.1.2) unstable; urgency=low
+
+  * Convert operational mode commands for wireless-modem to standard
+    format
+
+ -- Stephen Hemminger <stephen.hemminger@vyatta.com>  Tue, 03 Mar 2009 10:54:33 -0800
+
 vyatta-wirelessmodem (0.1.1) unstable; urgency=low
 
   [ Robert Bays ]
