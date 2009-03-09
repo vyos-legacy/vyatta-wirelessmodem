@@ -1,3 +1,10 @@
+vyatta-wirelessmodem (0.1.3) unstable; urgency=low
+
+  * Remove per-interface firewall templates.  They are auto-generated
+    now.
+
+ -- Bob Gilligan <gilligan@vyatta.com>  Mon, 09 Mar 2009 11:18:24 -0700
+
 vyatta-wirelessmodem (0.1.2) unstable; urgency=low
 
   * Convert operational mode commands for wireless-modem to standard
