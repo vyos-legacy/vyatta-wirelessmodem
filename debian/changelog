@@ -1,3 +1,9 @@
+vyatta-wirelessmodem (0.1.4) unstable; urgency=low
+
+  * Move disable-link-detect out of vyatta-cfg-quagga
+
+ -- Stephen Hemminger <stephen.hemminger@vyatta.com>  Mon, 20 Apr 2009 09:22:44 -0700
+
 vyatta-wirelessmodem (0.1.3) unstable; urgency=low
 
   * Remove per-interface firewall templates.  They are auto-generated
