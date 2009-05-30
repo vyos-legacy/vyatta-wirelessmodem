@@ -1,3 +1,9 @@
+vyatta-wirelessmodem (0.1.4+jenner1) unstable; urgency=low
+
+  * UNRELEASED
+
+ -- An-Cheng Huang <ancheng@vyatta.com>  Fri, 29 May 2009 18:33:27 -0700
+
 vyatta-wirelessmodem (0.1.4) unstable; urgency=low
 
   * Move disable-link-detect out of vyatta-cfg-quagga
