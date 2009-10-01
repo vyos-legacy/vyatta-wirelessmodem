@@ -1,3 +1,9 @@
+vyatta-wirelessmodem (0.1.6) unstable; urgency=low
+
+  * Add ifalias support
+
+ -- Stephen Hemminger <shemminger@lenny.localdomain>  Thu, 01 Oct 2009 13:21:55 -0700
+
 vyatta-wirelessmodem (0.1.5) unstable; urgency=low
 
   * UNRELEASED
