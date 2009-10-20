@@ -1,3 +1,4 @@
+priority: 350
 tag:
 type: txt
 help: Set wireless modem interface
