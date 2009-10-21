@@ -1,3 +1,9 @@
+vyatta-wirelessmodem (0.1.8) unstable; urgency=low
+
+  * move priority after tag nodes.
+
+ -- slioch <slioch@eng-140.vyatta.com>  Wed, 21 Oct 2009 09:17:12 -0700
+
 vyatta-wirelessmodem (0.1.7) unstable; urgency=low
 
   * pushed priority to node.def
