@@ -1,5 +1,5 @@
-priority: 350
 tag:
+priority: 350
 type: txt
 help: Set wireless modem interface
 comp_help: Enter wireless modem interface name (wlm0 - wlm999)
