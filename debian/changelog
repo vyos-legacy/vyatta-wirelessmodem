@@ -1,3 +1,9 @@
+vyatta-wirelessmodem (0.1.9+kenwood1) unstable; urgency=low
+
+  * UNRELEASED
+
+ -- An-Cheng Huang <ancheng@vyatta.com>  Wed, 17 Feb 2010 16:10:20 -0800
+
 vyatta-wirelessmodem (0.1.9) unstable; urgency=low
 
   * dependency update
