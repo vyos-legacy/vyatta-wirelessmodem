@@ -1,3 +1,10 @@
+vyatta-wirelessmodem (0.1.11) unstable; urgency=low
+
+  * Change vyatta-vtysh to vtysh
+  * Depends on recent version of quagga
+
+ -- Stephen Hemminger <stephen.hemminger@vyatta.com>  Tue, 09 Mar 2010 09:35:42 -0800
+
 vyatta-wirelessmodem (0.1.10) unstable; urgency=low
 
   * UNRELEASED
