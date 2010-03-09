@@ -12,4 +12,4 @@ fi
 device=`echo "$ipparam"|awk '{ print $1 }'`
 metric=`echo "$ipparam"|awk '{ print $2 }'`
 
-/usr/bin/vyatta-vtysh -c "conf t" -c "ip route 0.0.0.0/0 $device $metric "
+vtysh -c "conf t" -c "ip route 0.0.0.0/0 $device $metric"
