@@ -1,3 +1,9 @@
+vyatta-wirelessmodem (0.1.12) unstable; urgency=low
+
+  * UNRELEASED
+
+ -- An-Cheng Huang <ancheng@vyatta.com>  Thu, 22 Jul 2010 17:26:46 -0700
+
 vyatta-wirelessmodem (0.1.11) unstable; urgency=low
 
   * Change vyatta-vtysh to vtysh
