@@ -1,3 +1,9 @@
+vyatta-wirelessmodem (0.1.11+larkspur2) unstable; urgency=low
+
+  * Updae help strings
+
+ -- Stephen Hemminger <stephen.hemminger@vyatta.com>  Mon, 26 Jul 2010 16:13:57 -0700
+
 vyatta-wirelessmodem (0.1.11+larkspur1) unstable; urgency=low
 
   * UNRELEASED
