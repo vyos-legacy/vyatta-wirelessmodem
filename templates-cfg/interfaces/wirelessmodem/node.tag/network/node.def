@@ -1,5 +1,3 @@
 type: txt
-help: Set carrier network to define dial strings.
+help: Carrier network to define dial strings
 allowed: ls /opt/vyatta/share/ppp/network/
-comp_help: Set carrier network to define dial strings.
-  Defaults to AT&T.

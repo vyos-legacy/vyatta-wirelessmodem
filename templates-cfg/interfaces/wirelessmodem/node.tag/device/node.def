@@ -1,3 +1,3 @@
 type: txt
-help: Set the system device ID
-comp_help: \1  <ttyXXX>\tsystemtty device (default ttyUSB0)
+help: System device ID
+val_help: <ttyXXX>; System tty device name (default ttyUSB0)

@@ -1,4 +1,4 @@
 type: u32
-help: Set the MTU for the link
-comp_help: \1  <1-1500>\tmaximum transmission unit
+help: MTU for the link
+val_help: u32:1-1500; Maximum transmission unit
 syntax:expression: $VAR(@) >= 1 && $VAR(@) <= 1500; "MTU must be between 1 and 1500"

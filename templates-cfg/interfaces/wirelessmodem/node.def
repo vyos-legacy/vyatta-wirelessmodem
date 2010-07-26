@@ -1,10 +1,12 @@
 tag:
 priority: 350
 type: txt
-help: Set wireless modem interface
-comp_help: Enter wireless modem interface name (wlm0 - wlm999)
+help: Wireless modem interface name
 syntax:expression: pattern $VAR(@) "^wlm[0-9]+$" ; "Must be (wlm0 - wlm999)"
+val_help: wlmX; Wireless modem interface name
+
 delete: touch /tmp/wirelessmodem-$VAR(@).del
+
 end: if [ -f /var/run/ppp-$VAR(@).pid ]; then
          pid=$(cat /var/run/ppp-$VAR(@).pid | awk '$1 !~ /^[[:alpha:]]/ { print $1 }');
          sudo kill $pid;
