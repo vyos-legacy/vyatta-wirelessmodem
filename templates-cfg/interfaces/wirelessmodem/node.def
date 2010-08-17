@@ -2,7 +2,7 @@ tag:
 priority: 350
 type: txt
 help: Set wireless modem interface
-comp_help: Enter wireless modem interface name (wlm0 - wlm999)
+val_help: <wlmN>; Wireless modem interface name
 syntax:expression: pattern $VAR(@) "^wlm[0-9]+$" ; "Must be (wlm0 - wlm999)"
 delete: touch /tmp/wirelessmodem-$VAR(@).del
 end: if [ -f /var/run/ppp-$VAR(@).pid ]; then

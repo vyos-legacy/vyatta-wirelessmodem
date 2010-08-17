@@ -1,4 +1,4 @@
 type: u32
 help: Set the distance of the backup defualt route
 syntax:expression: $VAR(@) >= 1 && $VAR(@) <= 255; "Must be between (1-255)"
-comp_help: \1  0-255\t\tdistance of the backup route (default: 10) 
+val_help: u32:1-255; Distance of the backup route (default 10) 
