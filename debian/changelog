@@ -1,3 +1,9 @@
+vyatta-wirelessmodem (0.1.14) unstable; urgency=low
+
+  * Updae help strings
+
+ -- Mohit Mehta <mohit.mehta@vyatta.com>  Tue, 24 Aug 2010 18:11:11 -0700
+
 vyatta-wirelessmodem (0.1.13) unstable; urgency=low
 
   * update help text to use val_help
