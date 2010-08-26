@@ -1,3 +1,10 @@
+vyatta-wirelessmodem (0.1.15) unstable; urgency=low
+
+  * exclude already merged commit; was checked in after resolving
+    conflicts
+
+ -- Mohit Mehta <mohit.mehta@vyatta.com>  Thu, 26 Aug 2010 11:04:37 -0700
+
 vyatta-wirelessmodem (0.1.14) unstable; urgency=low
 
   * Updae help strings
