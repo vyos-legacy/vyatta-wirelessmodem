@@ -1,3 +1,10 @@
+vyatta-wirelessmodem (0.1.20) unstable; urgency=low
+
+  * let user specify complete path for custom chat script but warn if
+    script outside /config
+
+ -- Mohit Mehta <mohit@vyatta.com>  Fri, 06 May 2011 15:23:17 -0700
+
 vyatta-wirelessmodem (0.1.19) unstable; urgency=low
 
   * Fix Bug 7019 image upgrade won't preserve custom wireless modem
