@@ -1,3 +1,10 @@
+vyatta-wirelessmodem (0.1.19) unstable; urgency=low
+
+  * Fix Bug 7019 image upgrade won't preserve custom wireless modem
+    network chat script
+
+ -- Mohit Mehta <mohit@vyatta.com>  Fri, 06 May 2011 12:57:23 -0700
+
 vyatta-wirelessmodem (0.1.18) unstable; urgency=low
 
   * new branch
