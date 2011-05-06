@@ -70,8 +70,9 @@ end: if [ -f /var/run/ppp-$VAR(@).pid ]; then
 
        if [ -e /opt/vyatta/share/ppp/network/$network ]; then
           echo connect \'/usr/sbin/chat -v -t6 -f /opt/vyatta/share/ppp/network/$network\' >> $tmpfile;
-       elif [ -e /config/scripts/$network ]; then
-          echo connect \'/usr/sbin/chat -v -t6 -f /config/scripts/$network\' >> $tmpfile;
+       elif [ -e $network ]; then
+          /opt/vyatta/sbin/check_file_in_config_dir "$network" '/config/scripts'
+          echo connect \'/usr/sbin/chat -v -t6 -f $network\' >> $tmpfile;
        else
           echo "Could not find '$network' chat script"
           exit 1
