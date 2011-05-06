@@ -68,7 +68,14 @@ end: if [ -f /var/run/ppp-$VAR(@).pid ]; then
          network='att';
        fi;
 
-       echo connect \'/usr/sbin/chat -v -t6 -f /opt/vyatta/share/ppp/network/$network\' >> $tmpfile;
+       if [ -e /opt/vyatta/share/ppp/network/$network ]; then
+          echo connect \'/usr/sbin/chat -v -t6 -f /opt/vyatta/share/ppp/network/$network\' >> $tmpfile;
+       elif [ -e /config/scripts/$network ]; then
+          echo connect \'/usr/sbin/chat -v -t6 -f /config/scripts/$network\' >> $tmpfile;
+       else
+          echo "Could not find '$network' chat script"
+          exit 1
+       fi
 
        sudo rm -f /tmp/$VAR(@).log /etc/ppp/peers/$VAR(@)
        sudo mv $tmpfile /etc/ppp/peers/$VAR(@)
