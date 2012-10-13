@@ -1,3 +1,9 @@
+vyatta-wirelessmodem (0.1.24) unstable; urgency=low
+
+  * new branch
+
+ -- John Southworth <john.southworth@vyatta.com>  Fri, 12 Oct 2012 19:48:29 -0700
+
 vyatta-wirelessmodem (0.1.23) unstable; urgency=low
 
   * new branch
