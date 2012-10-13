@@ -1,3 +1,9 @@
+vyatta-wirelessmodem (0.1.24+daisy1) unstable; urgency=low
+
+  * create daisy branch
+
+ -- John Southworth <john.southworth@vyatta.com>  Sat, 13 Oct 2012 13:31:57 -0700
+
 vyatta-wirelessmodem (0.1.24) unstable; urgency=low
 
   * new branch
