@@ -1,3 +1,9 @@
+vyatta-wirelessmodem (0.1.24+hydrogen1) unstable; urgency=low
+
+  * New branch
+
+ -- Daniil Baturin <daniil@baturin.org>  Sun, 17 Nov 2013 01:29:45 +0100
+
 vyatta-wirelessmodem (0.1.24+daisy2) unstable; urgency=low
 
   * allow optional dependency on vyatta-unicast
