@@ -2,7 +2,7 @@ Source: vyatta-wirelessmodem
 Section: contrib/net
 Priority: extra
 Maintainer: VyOS Package Maintainers <maintainers@vyos.net>
-Build-Depends: debhelper (>= 5), autotools-dev
+Build-Depends: debhelper (>= 5), autotools-dev, autoconf
 Standards-Version: 3.7.2
 
 Package: vyatta-wirelessmodem
@@ -10,6 +10,6 @@ Architecture: all
 Depends: vyatta-cfg (>= 0.15.33),
  vyatta-bash | bash (>= 3.1),
  vyatta-op,
- vyatta-unicast | vyatta-quagga (>= 0.99.15-26)
+ vyatta-quagga (>= 0.99.15-26)
 Description: VyOS configuration/operational commands for USB 3G modems
  Vyatta configuration and operational templates and scripts for USB 3G modems
