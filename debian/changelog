@@ -1,3 +1,10 @@
+vyatta-wirelessmodem (0.1.24+vyos2+lithium3) unstable; urgency=low
+
+  * Sanitize debian/control
+  * Bug #635: add dependency on usb-modeswitch.
+
+ -- Daniil Baturin <daniil@baturin.org>  Mon, 21 Dec 2015 22:30:49 +0100
+
 vyatta-wirelessmodem (0.1.24+vyos2+lithium2) unstable; urgency=low
 
   * vyatta-wirelessmodem: update dh_gencontrol with new development flag
