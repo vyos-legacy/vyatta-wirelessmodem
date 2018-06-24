@@ -1,3 +1,16 @@
+vyatta-wirelessmodem (0.1.24+vyos2+current1) unstable; urgency=medium
+
+  [ Thomas Jepp ]
+  * Add missing build depends.
+
+  [ Daniil Baturin ]
+  * Sanitize debian/control
+  * Bug #635: add dependency on usb-modeswitch.
+
+  [ Kim Hagen ]
+
+ -- Kim Hagen <kim.sidney@gmail.com>  Sun, 24 Jan 2016 15:30:59 -0500
+
 vyatta-wirelessmodem (0.1.24+vyos2+lithium3) unstable; urgency=low
 
   * Sanitize debian/control
